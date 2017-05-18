@@ -1,0 +1,18 @@
+<component name="libraryTable">
+  <library name="jackson-annotations-2.8.0">
+    <CLASSES>
+      <root url="jar://C:/nexmo-java-2.0.1 (Library)/jackson-annotations-2.8.0.jar!/" />
+      <root url="jar://C:/nexmo-java-2.0.1 (Library)/jackson-core-2.8.4.jar!/" />
+      <root url="jar://C:/nexmo-java-2.0.1 (Library)/jackson-databind-2.8.4.jar!/" />
+      <root url="jar://C:/nexmo-java-2.0.1 (Library)/java-jwt-2.2.1.jar!/" />
+      <root url="jar://C:/nexmo-java-2.0.1 (Library)/httpcore-4.4.1.jar!/" />
+      <root url="jar://C:/nexmo-java-2.0.1 (Library)/httpclient-4.5.jar!/" />
+      <root url="jar://C:/nexmo-java-2.0.1 (Library)/commons-logging-1.2.jar!/" />
+      <root url="jar://C:/nexmo-java-2.0.1 (Library)/commons-lang3-3.5.jar!/" />
+      <root url="jar://C:/nexmo-java-2.0.1 (Library)/commons-codec-1.9.jar!/" />
+      <root url="jar://C:/nexmo-java-2.0.1 (Library)/client-2.0.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
