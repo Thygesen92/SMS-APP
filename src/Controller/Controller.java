@@ -24,8 +24,8 @@ public class Controller implements iController {
 
     public void sendSMS(String number, String msg, String sender) throws Exception {
         Util.configureLogging();
-        String API_KEY = "39eca910";
-        String API_SECRET = "04ffe9857dab0d6c";
+        String API_KEY = "";
+        String API_SECRET = "";
         String TO_NUMBER = "0045" + number;
         TokenAuthMethod auth = new TokenAuthMethod(API_KEY, API_SECRET);
         NexmoClient client = new NexmoClient(new AuthMethod[]{auth});

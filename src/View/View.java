@@ -61,7 +61,7 @@ public class View extends Application
 
     public void sendMsg() {
         try {
-            String number = "20729782";
+            String number = "";
             String msg = textArea.getText();
             String sender = "BORTFØREREN";
             this.controller_instance.sendSMS(number, msg, sender);
