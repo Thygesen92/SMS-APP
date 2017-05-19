@@ -9,72 +9,143 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import Model.User;
-import Model.model;
 
-public class View extends Application {
-    private Stage stage;
+//import Model.model;
+
+import javax.xml.soap.Text;
+
+public class View extends Application
+{
     private Scene scene;
-    private TextField antal;
-    private TextField produkt;
     private Button btnSend;
     private VBox vBox;
+    private Button seeTabelview;
+    private TextArea textArea;
+    private Label txtLabel;
     Controller controller_instance = new Controller();
 
-    public View() {
+    public View()
+    {
     }
 
+
     public static void main(String[] args) {
-        new model();
+       // new model();
         launch(args);
     }
 
-    public void start(Stage primaryStage) throws Exception {
-        this.stage = primaryStage;
-        this.btnSend = new Button("Start konkurrence");
-        this.btnSend.setOnAction((event) -> {
-            this.sendMsg(event);
+
+    public void start(Stage primaryStage) throws Exception
+    {
+
+        sndButton();
+        setSeeTabelview();
+        setTextArea();
+
+        vBox = new VBox(10);
+        vBox.getChildren().addAll(btnSend, seeTabelview, textArea, txtLabel);
+
+        btnSend.setOnAction((event) -> {
+            treadBegin();
         });
-        this.antal = new TextField("Antal");
-        this.produkt = new TextField("Produkt");
-        this.vBox = new VBox();
 
+        scene = new Scene(vBox, 500,450);
 
-        this.vBox.getChildren().addAll( this.antal, this.produkt, btnSend);
-        this.scene = new Scene(this.vBox, 500,450);
-        this.stage.setScene(this.scene);
-        this.stage.show();
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
-    private void sendMsg(ActionEvent event) {
+    public void sendMsg() {
         try {
-            String number = "???????????????????";
-            String msg = "Du har vundet " + this.antal.getText() + " af " + this.produkt.getText();
-            String sender = "Castus";
+            String number = "20729782";
+            String msg = textArea.getText();
+            String sender = "BORTFØREREN";
             this.controller_instance.sendSMS(number, msg, sender);
-        } catch (Exception var5) {
-            ;
         }
-
+        catch (Exception var5)
+        {
+        }
     }
-/*
-    public ComboBox fillCombobox(ComboBox cb) {
-        List Users = this.controller_instance.getUsers();
 
-        for(int i = 0; i < Users.size(); ++i) {
-            cb.getItems().addAll(new Object[]{Integer.valueOf(((User)Users.get(i)).getNumber())});
+    private void sndButton()
+    {
+        btnSend = new Button("Start konkurrence");
+        btnSend.setMaxWidth(150);
+        btnSend.setTranslateX(40);
+        btnSend.setTranslateY(205);
+    }
+
+
+    private void setSeeTabelview()
+    {
+        seeTabelview = new Button("Se kundetabel");
+        seeTabelview.setTranslateX(300);
+        seeTabelview.setTranslateY(170);
+    }
+
+
+    private void setTextArea()
+    {
+        textArea = new TextArea();
+        txtLabel = new Label("Besked her!");
+        textArea.setTranslateX(0);
+        textArea.setTranslateY(-50);
+        txtLabel.setTranslateY(-260);
+    }
+
+
+    public void treadBegin()
+    {
+        RunningThread thread1 = new RunningThread("TestThread", this );
+        thread1.start();
+    }
+}
+
+class RunningThread implements Runnable
+{
+
+    private Thread thread;
+    private String threadName;
+    View view;
+
+    RunningThread(String Name, View view)
+    {
+        threadName = Name;
+        this.view = view;
+        System.out.println("Creating: " + threadName);
+    }
+
+    @Override
+    public void run()
+    {
+        System.out.println("Running " + threadName);
+        try
+        {
+            for(int i = 1; i <= 40; i++)
+            {
+                System.out.println("Thread: " + threadName + ", " + i);
+                java.lang.Thread.sleep((long)(1000));
+            }
+            System.out.println("Thread ending");
+
         }
-
-        cb.setValue("Numbers");
-        return cb;
-    } */
-
-
+        catch (InterruptedException e)
+        {
+            System.out.println("Error catched " + e);
+        }
+        view.sendMsg();
+    }
+    public void start()
+    {
+        System.out.println("Starting: " + threadName);
+        if(thread == null)
+        {
+            thread = new Thread(this, threadName);
+            thread.start();
+        }
+    }
 }
